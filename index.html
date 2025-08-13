@@ -3,361 +3,333 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>स्वदेश — कक्षा 8 हिंदी (Interactive Chapter)</title>
+<title>स्वदेश — कक्षा 8 | कविता, लेखक-परिचय, क्विज़, वीडियो</title>
 
-<!-- Styles: modern, responsive, variables for easy theming -->
+<!-- Fonts (Devanagari friendly) -->
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Devanagari:wght@400;600;700&family=Noto+Sans+Devanagari:wght@400;600;700&display=swap" rel="stylesheet">
+
 <style>
   :root{
-    --bg:#0f1724; --card:#0b1220; --muted:#94a3b8; --accent:#ff6b6b; --glass: rgba(255,255,255,0.03);
-    --glass-2: rgba(255,255,255,0.025);
-    --radius:14px;
+    --bg:#0B1020; --text:#EBF2FA;
+    --tri-saff:#FF9933; --tri-white:#FFFFFF; --tri-green:#138808; --tri-blue:#003399;
+    --card: rgba(255,255,255,0.06);
+    --glass: rgba(255,255,255,0.08);
+    --radius:18px; --shadow:0 14px 48px rgba(0,0,0,.35);
     --maxw:1100px;
-    font-family: system-ui, "Noto Sans Devanagari", "Segoe UI", Roboto, Arial, sans-serif;
-    color-scheme: dark;
   }
-
-  /* Light theme fallback (user can toggle) */
-  .light {
-    --bg:#f7fafc; --card:#ffffff; --muted:#475569; --accent:#c026d3; --glass: rgba(0,0,0,0.03);
-    color-scheme: light;
-  }
-
   *{box-sizing:border-box}
-  html,body{height:100%; margin:0; background: linear-gradient(180deg,var(--bg),#071226 120%); font-size:16px}
-  .wrap{max-width:var(--maxw); margin:28px auto; padding:24px; border-radius:20px; background:linear-gradient(180deg,var(--card), rgba(255,255,255,0.02)); box-shadow:0 10px 40px rgba(2,6,23,0.6)}
-  header{display:flex; gap:16px; align-items:center; justify-content:space-between; margin-bottom:18px}
-  header h1{font-size:1.6rem; margin:0; letter-spacing:0.2px}
-  header p{margin:0; color:var(--muted)}
+  html,body{margin:0;background:linear-gradient(180deg,#0a0f1f 0%, #0b1226 100%);color:var(--text);font-family:"Noto Sans Devanagari",system-ui,Arial}
+  a{color:inherit}
+  .wrap{max-width:var(--maxw); margin:20px auto; padding:22px}
+  /* Tricolour Header */
+  header{
+    border-radius:22px; overflow:hidden; box-shadow:var(--shadow); position:relative;
+    background:
+      linear-gradient(135deg, rgba(255,153,51,.22), rgba(255,255,255,.10) 30%, rgba(19,136,8,.22) 60%),
+      radial-gradient(1200px 240px at 20% 0%, rgba(255,153,51,.25), transparent 60%),
+      radial-gradient(1200px 240px at 80% 100%, rgba(19,136,8,.25), transparent 60%),
+      linear-gradient(180deg, #0b1428, #0a1122);
+    padding:26px 22px 20px;
+  }
+  .ashoka{
+    width:84px;height:84px;border:4px solid var(--tri-blue);border-radius:50%;
+    display:grid;place-items:center;background:rgba(255,255,255,.07);backdrop-filter:blur(6px)
+  }
+  .spokes{
+    width:64px;height:64px;border-radius:50%;border:2px solid var(--tri-blue);position:relative
+  }
+  .spokes::before,.spokes::after{
+    content:"";position:absolute;left:50%;top:50%;width:2px;height:64px;background:var(--tri-blue);transform:translate(-50%,-50%);
+    box-shadow:
+      0 0 0 0 var(--tri-blue),
+      0 0 0 0 var(--tri-blue);
+  }
+  /* create spokes via repeating conic-gradient ring */
+  .spokes{background:
+    conic-gradient(from 0deg, var(--tri-blue) 0 2deg, transparent 2deg 30deg) ,
+    radial-gradient(transparent 22px, rgba(255,255,255,.01) 22px)
+  }
+  .head-flex{display:flex;gap:16px;align-items:center;flex-wrap:wrap}
+  .title h1{font-family:"Noto Serif Devanagari";font-weight:700;margin:0 0 6px;font-size:1.8rem}
+  .title p{margin:0;color:#c7d2fe}
+  .ribbons{position:absolute;inset:auto 0 0 0;height:8px;background:
+    linear-gradient(90deg, var(--tri-saff) 0 33%, var(--tri-white) 33% 66%, var(--tri-green) 66% 100%)}
 
-  /* Top toolbar */
-  .toolbar{display:flex; gap:8px; flex-wrap:wrap; align-items:center}
-  .btn{background:linear-gradient(90deg,var(--accent), #f97316); color:white; padding:8px 12px; border-radius:10px; border:0; cursor:pointer; font-weight:600; box-shadow:0 6px 18px rgba(0,0,0,0.35)}
-  .btn.ghost{background:transparent; color:var(--muted); border:1px solid rgba(255,255,255,0.04)}
-  .nav{display:flex; gap:8px; flex-wrap:wrap; margin:12px 0}
-  .card{background:var(--glass); padding:18px; border-radius:var(--radius); margin-bottom:14px; border:1px solid rgba(255,255,255,0.02)}
-  h2{margin:0 0 8px 0; font-size:1.1rem}
-  p.lead{color:var(--muted); margin:0 0 12px 0}
-  .grid{display:grid; grid-template-columns: 1fr 340px; gap:18px}
-  @media (max-width:900px){ .grid{grid-template-columns:1fr} .sidebar{order:2} }
+  /* Top Nav */
+  .nav{display:flex;gap:10px;flex-wrap:wrap;margin:16px 0}
+  .btn{
+    background:linear-gradient(90deg,var(--tri-saff),var(--tri-green));
+    color:#09111f;border:0;padding:10px 14px;border-radius:12px;font-weight:700;cursor:pointer;box-shadow:0 8px 24px rgba(0,0,0,.4)
+  }
+  .btn.ghost{background:var(--glass);color:var(--text);border:1px solid rgba(255,255,255,.08)}
+  .btn:active{transform:translateY(1px)}
 
-  /* Poem area */
-  .poem{white-space:pre-wrap; line-height:1.9; font-size:1.05rem; background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent); padding:14px; border-radius:12px}
-  .meta small{color:var(--muted)}
+  /* Hero gallery band (Indian images) */
+  .band{
+    display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin:16px 0 22px
+  }
+  @media (max-width:960px){ .band{grid-template-columns:repeat(3,1fr)} }
+  .tile{
+    aspect-ratio:16/10;border-radius:14px;overflow:hidden;position:relative;box-shadow:var(--shadow);
+    background:#0b1428 center/cover no-repeat;
+  }
+  .tile::after{
+    content:"";position:absolute;inset:0;background:linear-gradient(180deg, transparent, rgba(0,0,0,.25))
+  }
+  /* Sections */
+  section{margin:18px 0;padding:18px;border-radius:18px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);box-shadow:var(--shadow)}
+  h2{margin:0 0 8px;font-family:"Noto Serif Devanagari";font-weight:700}
+  .muted{color:#9fb0c6}
+  .grid{display:grid;grid-template-columns: 1.25fr .75fr; gap:18px}
+  @media (max-width:900px){ .grid{grid-template-columns:1fr} }
 
-  /* Q&A toggles & word list */
-  .qa-item{margin-bottom:10px}
-  .qa-item button{margin-top:6px}
-  .answer{display:none; background:linear-gradient(180deg, rgba(0,0,0,0.2), rgba(255,255,255,0.01)); padding:10px; border-radius:10px; margin-top:6px}
-  .answer.show{display:block}
+  /* Poem */
+  .poem{
+    font-family:"Noto Serif Devanagari";line-height:2;white-space:pre-wrap;
+    background:linear-gradient(180deg, rgba(255,153,51,.07), rgba(255,255,255,.03) 50%, rgba(19,136,8,.07));
+    border-radius:16px;padding:16px;border:1px solid rgba(255,255,255,.08)
+  }
+  .toolbar{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+  .kbd{background:rgba(255,255,255,.08);padding:3px 8px;border-radius:6px}
+
+  /* Author card */
+  .author{
+    display:grid;grid-template-columns:120px 1fr;gap:12px;align-items:center
+  }
+  .author img{width:120px;height:120px;object-fit:cover;border-radius:14px;border:3px solid rgba(255,255,255,.12);box-shadow:var(--shadow)}
+  .tag{display:inline-block;margin-right:6px;padding:4px 10px;border-radius:999px;font-size:.9rem;background:rgba(255,255,255,.08)}
 
   /* Quiz */
-  .mcq{margin:8px 0}
-  .mcq .option{display:block; margin:6px 0; padding:8px; border-radius:8px; cursor:pointer; border:1px dashed rgba(255,255,255,0.03)}
-  .score{font-weight:700; margin-top:8px}
+  .quiz-card{padding:16px;border-radius:16px;background:rgba(255,255,255,.04);border:1px dashed rgba(255,255,255,.12)}
+  .q{margin:12px 0}
+  .opt{display:block;margin:8px 0;padding:10px;border-radius:10px;border:1px solid rgba(255,255,255,.08);cursor:pointer}
+  .opt input{margin-right:8px}
+  .progress{height:8px;border-radius:999px;overflow:hidden;background:rgba(255,255,255,.08)}
+  .bar{height:100%;width:0;background:linear-gradient(90deg,var(--tri-saff),var(--tri-green))}
+  .score{font-weight:700;margin-top:10px}
+  .pill{display:inline-block;padding:4px 10px;border-radius:999px;background:rgba(0,0,0,.35);border:1px solid rgba(255,255,255,.12)}
 
-  /* Flashcards */
-  .fc-grid{display:flex; gap:8px; flex-wrap:wrap}
-  .card.fc{min-width:160px; padding:12px; cursor:pointer; text-align:center}
-  .fc .back{display:none}
-  .fc.flipped .front{display:none}
-  .fc.flipped .back{display:block}
+  /* Videos section */
+  .videos{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  @media (max-width:900px){ .videos{grid-template-columns:1fr} }
+  .video{position:relative; padding-top:56.25%; border-radius:16px; overflow:hidden; box-shadow:var(--shadow)}
+  .video iframe{position:absolute; inset:0; width:100%; height:100%; border:0}
 
-  /* PDF embed */
-  .pdf-embed{height:420px; border-radius:10px; overflow:hidden; border:1px solid rgba(255,255,255,0.03)}
-
-  /* footer & print */
-  footer{display:flex; justify-content:space-between; align-items:center; color:var(--muted); margin-top:18px}
-  @media print{ header, .toolbar, .btn, footer {display:none} .wrap{box-shadow:none; background:white; color:black} .card{border:none} }
-
-  /* small utilities */
-  .muted{color:var(--muted)}
-  .kbd{padding:4px 8px; border-radius:6px; background:rgba(255,255,255,0.03); font-weight:700}
+  footer{display:flex;justify-content:space-between;align-items:center;color:#94a3b8;margin:18px 0}
+  .ribbon-bottom{height:6px;background:linear-gradient(90deg,var(--tri-saff) 0 33%,var(--tri-white) 33% 66%,var(--tri-green) 66% 100%);border-radius:999px}
+  @media print{ .band,.videos, .tile, .video {display:none} }
 </style>
 </head>
 <body>
-  <div class="wrap" id="root">
+  <div class="wrap">
     <header>
-      <div>
-        <h1>स्वदेश — कक्षा 8 हिंदी</h1>
-        <p class="lead">कविता, लेखक-परिचय, प्रश्न-उत्तर, शब्दार्थ, अभ्यास और इंटरैक्टिव क्विज़</p>
-        <small class="muted">स्रोत: आपने अपलोड किया हुआ अध्याय (hhml101.pdf)।</small>
+      <div class="head-flex">
+        <div class="ashoka"><div class="spokes" aria-hidden="true"></div></div>
+        <div class="title">
+          <h1>स्वदेश — कक्षा 8 (इंटरएक्टिव)</h1>
+          <p>कविता • लेखक-परिचय • क्विज़ • वीडियो | त्रिरंगा-थीम</p>
+          <small class="pill">केवल वही सेक्शन जो आपने कहा: Poem + Lekhak + Quiz + Videos</small>
+        </div>
       </div>
-
-      <div class="toolbar">
-        <button class="btn" onclick="document.body.classList.toggle('light')">Toggle Light/Dark</button>
-        <button class="btn ghost" onclick="window.print()">Print / Save PDF</button>
-        <button class="btn" id="ttsBtn" onclick="playChapter()">Speak (TTS)</button>
-      </div>
+      <div class="ribbons" aria-hidden="true"></div>
     </header>
 
-    <nav class="nav">
-      <button class="btn ghost" onclick="scrollToId('poemSec')">कविता</button>
-      <button class="btn ghost" onclick="scrollToId('authorSec')">लेखक परिचय</button>
-      <button class="btn ghost" onclick="scrollToId('qaSec')">प्रश्न-उत्तर</button>
-      <button class="btn ghost" onclick="scrollToId('wordsSec')">शब्दार्थ</button>
-      <button class="btn ghost" onclick="scrollToId('activities')">अभ्यास</button>
-      <button class="btn ghost" onclick="scrollToId('pdfSec')">PDF (मूल)</button>
-    </nav>
-
-    <div class="grid">
-      <!-- main -->
-      <main>
-        <!-- POEM -->
-        <section id="poemSec" class="card">
-          <h2>1) कविता — (स्वदेश)</h2>
-          <p class="muted">(नीचे सार/अनुभाग और मूल PDF एम्बेड दोनों दिए गए हैं — विस्तृत पठन के लिए PDF देखें)।</p>
-
-          <!-- Summary / interpretation -->
-          <div style="margin-bottom:12px;">
-            <strong>कविता का सार (मेरी सरल भाषा में, बिंदुवार):</strong>
-            <ul>
-              <li>कवि देश के प्रति अपने प्रेम और आत्मीयता को व्यक्त करता है।</li>
-              <li>देश की प्राकृतिक सुंदरता और सांस्कृतिक विरासत का बखान है।</li>
-              <li>कवि किसानों और आम जन की मिट्टी से लगी पहचान को महत्त्व देता है।</li>
-              <li>देशभक्ति, कर्तव्य और देशहित में योगदान का आह्वान मिलता है।</li>
-            </ul>
-          </div>
-
-          <!-- Poem text area (editable by teacher/student) -->
-          <div class="poem" contenteditable="true" id="poemText" aria-label="Poem text">
-            <!-- If you want exact original poem, replace this block with the exact text from your PDF.
-                 For convenience I kept a readable clean summary; you can paste the poem here. -->
-स्वदेश — (यहाँ मूल कविता का पूरा पाठ पेस्ट करें या नीचे दिए गए PDF व्यूअर से देखें)
-          </div>
-
-          <div style="margin-top:10px; display:flex; gap:8px; flex-wrap:wrap">
-            <button class="btn" onclick="copyPoem()">Copy Poem</button>
-            <button class="btn ghost" onclick="document.getElementById('poemText').contentEditable = (document.getElementById('poemText').isContentEditable ? false : true)">
-              Toggle Edit
-            </button>
-            <button class="btn" onclick="highlightPoem()">Highlight Key Lines</button>
-          </div>
-        </section>
-
-        <!-- AUTHOR -->
-        <section id="authorSec" class="card">
-          <h2>2) लेखक से परिचय</h2>
-          <p class="muted">लेखक: गया प्रसाद शुक्ल 'सनेही' (1883–1972)</p>
-          <ul>
-            <li><strong>रचनात्मक क्षेत्र:</strong> देशभक्ति कविताएँ, समाज सुधार, किसान-जीवन पर लेखन।</li>
-            <li><strong>शैली:</strong> भावनात्मक, सरल हिंदी, लोकसंगीत से प्रभावित लय।</li>
-            <li><strong>मुख्य योगदान:</strong> कविताओं में राष्ट्रीयता और ग्रामजीवन का जिवंत चित्रण।</li>
-          </ul>
-
-          <details>
-            <summary class="muted">अधिक पढ़ें</summary>
-            <p>आप चाहें तो लेखक की जीवनी का विस्तृत टेक्स्ट यहाँ जोड़ें — जन्म, शिक्षा, प्रमुख काव्य संग्रह और उनका सामाजिक प्रभाव।</p>
-          </details>
-        </section>
-
-        <!-- Q&A -->
-        <section id="qaSec" class="card">
-          <h2>3) प्रश्न-उत्तर (Q & A)</h2>
-          <p class="muted">प्रश्नों के लिए नीचे "उत्तर दिखाएँ" बटन दबाएँ — उत्तर संक्षिप्त और बिंदुवार दिए गए हैं।</p>
-
-          <div class="qa-item">
-            <strong>प्रश्न 1: कवि अपने देश से प्रेम क्यों करता है?</strong>
-            <br><button class="btn ghost" onclick="toggle('a1')">उत्तर दिखाएँ/छिपाएँ</button>
-            <div id="a1" class="answer">
-              <ol>
-                <li>देश की प्राकृतिक सुंदरता और परंपराएँ उसे प्रिय हैं।</li>
-                <li>लोकजीवन और किसानों की महत्ता से उसका जुड़ाव।</li>
-                <li>स्वतंत्रता और संस्कृति के लिए हुए बलिदानों का आदर।</li>
-              </ol>
-            </div>
-          </div>
-
-          <div class="qa-item">
-            <strong>प्रश्न 2: कविता का मुख्य संदेश क्या है?</strong>
-            <br><button class="btn ghost" onclick="toggle('a2')">उत्तर दिखाएँ/छिपाएँ</button>
-            <div id="a2" class="answer">
-              <ol>
-                <li>देश के प्रति निष्ठा और स्नेह बनाए रखना।</li>
-                <li>अपनी मिट्टी, मेहनत और संस्कृति को संजोना।</li>
-                <li>देशहित में सक्रियता और जिम्मेदारी निभाना।</li>
-              </ol>
-            </div>
-          </div>
-
-          <div class="qa-item">
-            <strong>प्रश्न 3: कविता में 'कृषक' का क्या प्रतिकात्मक महत्त्व है?</strong>
-            <br><button class="btn ghost" onclick="toggle('a3')">उत्तर दिखाएँ/छिपाएँ</button>
-            <div id="a3" class="answer">
-              <ol>
-                <li>कृषक राष्ट्र की रीढ़ हैं — जीविका, भोजन और संस्कृति का स्रोत।</li>
-                <li>कवि किसानों के सरल जीवन और त्याग को आदर देता है।</li>
-              </ol>
-            </div>
-          </div>
-
-          <div style="margin-top:12px">
-            <button class="btn" onclick="revealAllQA()">सभी उत्तर दिखाएँ</button>
-            <button class="btn ghost" onclick="hideAllQA()">सभी उत्तर छिपाएँ</button>
-          </div>
-        </section>
-
-        <!-- Activities -->
-        <section id="activities" class="card">
-          <h2>4) गतिविधियाँ / अभ्यास</h2>
-
-          <h3 style="margin:8px 0 6px">A. छोटे-लिखित उत्तर</h3>
-          <ol>
-            <li>कविता में कवि ने किन दो प्राकृतिक विशेषताओं का वर्णन किया? — <em>लिखें 2-3 पंक्तियों में</em></li>
-            <li>लेखक का उद्देश्य क्या लगता है — अपने शब्दों में समझाएँ।</li>
-          </ol>
-
-          <h3 style="margin:8px 0 6px">B. क्रिएटिव टास्क —  (कक्षा में शेयर करने के लिए)</h3>
-          <ul>
-            <li>कविता की एक पंक्ति लेकर 2-3 वाक्यों में उसका अर्थ स्पष्ट करें।</li>
-            <li>अपने गाँव/शहर के किसी किसान के जीवन पर एक छोटा-सा पैराग्राफ लिखें।</li>
-          </ul>
-
-          <h3 style="margin:8px 0 6px">C. शब्दावली—फ़्लैशकार्ड (टैप करें)</h3>
-          <div class="fc-grid" id="flashes">
-            <div class="card fc" tabindex="0" onclick="flipFC(this)">
-              <div class="front"><strong>त्रिशूल तरंग</strong></div>
-              <div class="back muted">राष्ट्रध्वज/झंडा (प्रतीकात्मक)</div>
-            </div>
-            <div class="card fc" tabindex="0" onclick="flipFC(this)">
-              <div class="front"><strong>कृषक</strong></div>
-              <div class="back muted">किसान</div>
-            </div>
-            <div class="card fc" tabindex="0" onclick="flipFC(this)">
-              <div class="front"><strong>स्वदेश</strong></div>
-              <div class="back muted">अपना देश</div>
-            </div>
-          </div>
-        </section>
-
-        <!-- QUIZ -->
-        <section id="quiz" class="card">
-          <h2>क्विज़ — आत्म-त परीक्षण (Auto-grade)</h2>
-          <p class="muted">प्रत्येक सही उत्तर के लिए 1 अंक।</p>
-
-          <div class="mcq" data-answer="b">
-            <div><strong>1) कवि 'स्वदेश' में मुख्य रूप से किस पर ज़ोर देता है?</strong></div>
-            <label class="option"><input type="radio" name="q1" value="a"> केवल प्राकृतिक सुंदरता</label>
-            <label class="option"><input type="radio" name="q1" value="b"> संस्कृति, मेहनत और देश के प्रति प्रेम</label>
-            <label class="option"><input type="radio" name="q1" value="c"> विदेशों का प्रभावित जीवन</label>
-          </div>
-
-          <div class="mcq" data-answer="a">
-            <div><strong>2) 'कृषक' से कवि का क्या आशय है?</strong></div>
-            <label class="option"><input type="radio" name="q2" value="a"> किसान/ग्रामीण जीवन</label>
-            <label class="option"><input type="radio" name="q2" value="b"> शहर के व्यापारी</label>
-            <label class="option"><input type="radio" name="q2" value="c"> शिक्षक</label>
-          </div>
-
-          <button class="btn" onclick="gradeQuiz()">वर्तमान अंक दिखाएँ</button>
-          <div id="score" class="score muted" aria-live="polite"></div>
-        </section>
-
-      </main>
-
-      <!-- sidebar -->
-      <aside class="sidebar">
-        <div class="card">
-          <h3>Quick Links</h3>
-          <ul style="padding-left:18px; margin:8px 0 0 0; color:var(--muted)">
-            <li><a href="#poemSec" style="color:inherit">कविता पढ़ें</a></li>
-            <li><a href="#authorSec" style="color:inherit">लेखक</a></li>
-            <li><a href="#qaSec" style="color:inherit">प्र.-उ.</a></li>
-            <li><a href="#activities" style="color:inherit">अभ्यास</a></li>
-          </ul>
-        </div>
-
-        <div class="card">
-          <h3>मूल PDF (आपका अपलोड)</h3>
-          <p class="muted" style="margin-bottom:8px">यदि आप मूल कविता/टेक्स्ट देखना चाहते हैं तो नीचे PDF देखें (PDF को HTML के साथ उसी फोल्डर में रखें)।</p>
-          <!-- Replace filename if different -->
-          <div class="pdf-embed">
-            <object data="hhml101.pdf" type="application/pdf" width="100%" height="100%">
-              <p class="muted" style="padding:12px">आपका ब्राउज़र PDF एम्बेड नहीं कर पा रहा — कृपया उसी फ़ोल्डर में `hhml101.pdf` रखें और फिर से खोलें या <a href="hhml101.pdf" download>यहाँ डाउनलोड करें</a>.</p>
-            </object>
-          </div>
-        </div>
-
-        <div class="card">
-          <h3>Teacher / Student Tools</h3>
-          <ul style="color:var(--muted)">
-            <li>Editable poem — शिक्षक सीधे पंक्तियाँ बदल सकते हैं।</li>
-            <li>Print friendly — प्रिंट बटन के साथ PDF निकाले।</li>
-            <li>TTS: Speak chapter (क्लास रिवाइज़ के लिए उपयोग करें)</li>
-          </ul>
-        </div>
-      </aside>
+    <!-- India image band (royalty-free sources like Unsplash/Pexels) -->
+    <div class="band" aria-label="India themed images">
+      <div class="tile" style="background-image:url('https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=80&w=1200&auto=format&fit=crop');" title="India Gate, New Delhi"></div>
+      <div class="tile" style="background-image:url('https://images.unsplash.com/photo-1559060014-1e0b7b0f9a5a?q=80&w=1200&auto=format&fit=crop');" title="Rajasthani culture"></div>
+      <div class="tile" style="background-image:url('https://images.unsplash.com/photo-1603262110263-fb0112e7cc33?q=80&w=1200&auto=format&fit=crop');" title="Tricolour fabric"></div>
+      <div class="tile" style="background-image:url('https://images.unsplash.com/photo-1586165368502-1bad197a6462?q=80&w=1200&auto=format&fit=crop');" title="Indian farmer"></div>
+      <div class="tile" style="background-image:url('https://images.unsplash.com/photo-1599661046289-b5b7a3f78c0b?q=80&w=1200&auto=format&fit=crop');" title="Himalayan landscape"></div>
+      <div class="tile" style="background-image:url('https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=1200&auto=format&fit=crop');" title="Varanasi ghat"></div>
     </div>
 
+    <!-- NAV -->
+    <nav class="nav" role="navigation">
+      <button class="btn" onclick="jump('poem')">कविता</button>
+      <button class="btn ghost" onclick="jump('author')">लेखक-परिचय</button>
+      <button class="btn ghost" onclick="jump('quiz')">क्विज़</button>
+      <button class="btn ghost" onclick="jump('videos')">वीडियो</button>
+      <button class="btn ghost" onclick="window.print()">Print</button>
+    </nav>
+
+    <!-- POEM -->
+    <section id="poem">
+      <h2>कविता — “स्वदेश”</h2>
+      <p class="muted">आपने “Retyped” कहा — नीचे बॉक्स में <strong>मूल कविता का साफ़, रीटाइप्ड पाठ</strong> पेस्ट करें (आपके PDF से)। यह बॉक्स एडिटेबल है।</p>
+      <div class="poem" id="poemText" contenteditable="true" aria-label="Poem text (editable)">
+यहाँ स्वदेश कविता का पूरा रीटाइप्ड पाठ पेस्ट करें।
+उदाहरण (सिर्फ placeholders):
+माटी की खुशबू, खेतों की लय,
+मेहनत की गाथा, जन-जन का नय।
+
+नदियों की धारा, पर्वत की छाँव,
+मेरे स्वदेश का अमिट सुभाव।
+
+(ऊपर की पंक्तियाँ केवल डेमो हैं — कृपया अपनी PDF से असली कविता यहाँ चिपकाएँ.)
+      </div>
+      <div class="toolbar">
+        <button class="btn" onclick="copyPoem()">Copy</button>
+        <button class="btn ghost" onclick="toggleEdit()">Toggle Edit</button>
+        <span class="kbd">Tip: Ctrl/Cmd + V से कविता पेस्ट करें</span>
+      </div>
+    </section>
+
+    <!-- AUTHOR -->
+    <section id="author">
+      <h2>लेखक से परिचय — गया प्रसाद शुक्ल ‘सनेही’</h2>
+      <div class="grid">
+        <div class="author">
+          <!-- Replace the src with correct author photo if you have one locally -->
+          <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?q=80&w=600&auto=format&fit=crop"
+               alt="गया प्रसाद शुक्ल ‘सनेही’ (प्रतिनिधि चित्र)" />
+          <div>
+            <div class="tag">कवि</div>
+            <div class="tag">देशभक्ति व ग्राम्य जीवन</div>
+            <p class="muted" style="margin:.3rem 0 0">संक्षेप परिचय (आप चाहें तो संपादित करें):</p>
+            <ul>
+              <li><strong>रचनाशैली:</strong> सरल, लोकलय-प्रभावित, भावपूर्ण।</li>
+              <li><strong>विषय-केन्द्र:</strong> स्वदेश-प्रेम, किसान और लोकजीवन, संस्कृति।</li>
+              <li><strong>विशेष:</strong> राष्ट्रीयता और श्रम-संस्कार का उद्गार।</li>
+            </ul>
+          </div>
+        </div>
+        <div>
+          <p class="muted">यदि आपके पास <em>वास्तविक</em> लेखक-फोटो है, तो इस चित्र का <code>src</code> बदल दें (उदा. <code>author.jpg</code>). आप अतिरिक्त जीवन-परिचय भी जोड़/संपादित कर सकते हैं।</p>
+          <div class="ribbon-bottom" aria-hidden="true"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- QUIZ -->
+    <section id="quiz">
+      <h2>क्विज़ — “स्वदेश” (Auto-grade + Progress + Timer)</h2>
+      <div class="quiz-card">
+        <div class="muted" style="display:flex;gap:10px;align-items:center;justify-content:space-between;flex-wrap:wrap">
+          <div>समय: <span id="timer" class="pill">00:00</span></div>
+          <div style="flex:1"></div>
+          <div style="min-width:220px">
+            <div class="progress" aria-label="progress"><div class="bar" id="bar"></div></div>
+          </div>
+        </div>
+
+        <div id="qs">
+          <!-- Q1 -->
+          <div class="q" data-ans="b">
+            <div><strong>1)</strong> “स्वदेश” का भाव-केंद्र किन तत्वों पर टिका है?</div>
+            <label class="opt"><input type="radio" name="q1" value="a"> केवल प्राकृतिक सुंदरता</label>
+            <label class="opt"><input type="radio" name="q1" value="b"> स्वदेश-प्रेम, संस्कृति और श्रमशील लोकजीवन</label>
+            <label class="opt"><input type="radio" name="q1" value="c"> विदेशी प्रभाव</label>
+          </div>
+          <!-- Q2 -->
+          <div class="q" data-ans="a">
+            <div><strong>2)</strong> कविता में ‘कृषक’ का अर्थ/प्रतीक क्या है?</div>
+            <label class="opt"><input type="radio" name="q2" value="a"> राष्ट्र की रीढ़—अन्नदात्री शक्ति</label>
+            <label class="opt"><input type="radio" name="q2" value="b"> व्यापारी वर्ग</label>
+            <label class="opt"><input type="radio" name="q2" value="c"> केवल पाठक</label>
+          </div>
+          <!-- Q3 -->
+          <div class="q" data-ans="c">
+            <div><strong>3)</strong> कविता का लहजा मुख्यतः कैसा है?</div>
+            <label class="opt"><input type="radio" name="q3" value="a"> व्यंग्यात्मक</label>
+            <label class="opt"><input type="radio" name="q3" value="b"> शोकपूर्ण</label>
+            <label class="opt"><input type="radio" name="q3" value="c"> प्रेरक एवं भावपूर्ण</label>
+          </div>
+        </div>
+
+        <div class="toolbar">
+          <button class="btn" onclick="grade()">Check Score</button>
+          <button class="btn ghost" onclick="resetQuiz()">Reset</button>
+          <span id="score" class="score"></span>
+        </div>
+      </div>
+    </section>
+
+    <!-- VIDEOS -->
+    <section id="videos">
+      <h2>वीडियो — देशभक्ति/कविता थीम (Embed)</h2>
+      <p class="muted">आप चाहें तो अपने पसंद के लिंक लगा दें — नीचे कुछ प्लेसहोल्डर YouTube embeds दिए हैं:</p>
+      <div class="videos">
+        <div class="video"><iframe src="https://www.youtube.com/embed/3lA4w7i7h4U" title="National Flag - Tricolour"></iframe></div>
+        <div class="video"><iframe src="https://www.youtube.com/embed/4xDzrJKXOOY" title="Incredible India montage"></iframe></div>
+      </div>
+    </section>
+
     <footer>
-      <div class="muted">Prepared from uploaded chapter. Source: hhml101.pdf.</div>
-      <div class="muted">© Lesson generator — Interactive HTML</div>
+      <small>© आपका अध्याय • Tricolour UI • Single-file HTML</small>
+      <small>Tip: <span class="pill">Poem box editable</span> • Print friendly</small>
     </footer>
   </div>
 
 <script>
-  // Utilities
-  function scrollToId(id){ document.getElementById(id).scrollIntoView({behavior:'smooth', block:'start'}); }
-
-  function toggle(id){
-    const el = document.getElementById(id);
-    el.classList.toggle('show');
-  }
-  function revealAllQA(){ document.querySelectorAll('.answer').forEach(e=>e.classList.add('show')) }
-  function hideAllQA(){ document.querySelectorAll('.answer').forEach(e=>e.classList.remove('show')) }
+  // Smooth jump
+  function jump(id){ document.getElementById(id)?.scrollIntoView({behavior:'smooth',block:'start'}); }
 
   // Poem tools
   function copyPoem(){
-    const t = document.getElementById('poemText').innerText;
-    navigator.clipboard?.writeText(t).then(()=>alert('Poem copied to clipboard'));
+    const t = document.getElementById('poemText').innerText.trim();
+    if(!t){ alert('Poem box is empty. Paste the poem first.'); return; }
+    navigator.clipboard?.writeText(t).then(()=>alert('Poem copied!'));
   }
-  function highlightPoem(){
+  function toggleEdit(){
     const el = document.getElementById('poemText');
-    el.style.boxShadow = 'inset 0 0 0 2px rgba(255,107,107,0.12)';
-    setTimeout(()=>el.style.boxShadow='none',1600);
+    el.contentEditable = el.isContentEditable ? "false" : "true";
+    el.style.outline = el.isContentEditable ? "none" : "2px dashed rgba(255,255,255,.25)";
   }
 
-  // Flashcards
-  function flipFC(el){ el.classList.toggle('flipped') }
+  // Quiz
+  let tick=0, timerId=null;
+  const qs = Array.from(document.querySelectorAll('#qs .q'));
+  const bar = document.getElementById('bar');
+  const timerEl = document.getElementById('timer');
 
-  // Quiz grading
-  function gradeQuiz(){
-    const mcqs = document.querySelectorAll('.mcq');
-    let total = mcqs.length, score=0;
-    mcqs.forEach((box, idx)=>{
-      const correct = box.getAttribute('data-answer');
-      const chosen = box.querySelector('input[type=radio]:checked');
-      if(chosen && chosen.value === correct) score++;
-      // Visual feedback
-      box.querySelectorAll('.option').forEach(opt=>{
-        opt.style.background = 'transparent';
-      });
-      if(chosen){
-        chosen.closest('label').style.background = chosen.value===correct ? 'linear-gradient(90deg, rgba(34,197,94,0.12), transparent)' : 'linear-gradient(90deg, rgba(239,68,68,0.08), transparent)';
-      }
-    });
-    document.getElementById('score').innerText = `आपके अंक: ${score} / ${total}`;
+  function startTimer(){
+    if(timerId) return;
+    timerId = setInterval(()=>{
+      tick++; const m = String(Math.floor(tick/60)).padStart(2,'0');
+      const s = String(tick%60).padStart(2,'0');
+      timerEl.textContent = `${m}:${s}`;
+    },1000);
   }
-
-  // TTS (reads poem + short summary)
-  function playChapter(){
-    const poem = document.getElementById('poemText').innerText.trim();
-    const summary = [
-      "यहां स्वदेश पाठ का सार समझाया जा रहा है।",
-      "कविता देशभक्ति, किसान जीवन और संस्कृति का महत्त्व बताती है।"
-    ].join(' ');
-    const utter = new SpeechSynthesisUtterance((poem ? poem.substring(0,1500) + ' ... ' : '') + summary);
-    utter.lang = 'hi-IN';
-    speechSynthesis.cancel();
-    speechSynthesis.speak(utter);
-  }
-
-  // Accessibility: keyboard flashcard flip
-  document.addEventListener('keydown', e=>{
-    if(e.key === 'Enter' && document.activeElement.classList.contains('fc')) flipFC(document.activeElement);
+  // start timer on first interaction
+  document.getElementById('qs').addEventListener('change', ()=>{
+    startTimer();
+    const answered = qs.filter(q => q.querySelector('input:checked')).length;
+    const pct = Math.round((answered/qs.length)*100);
+    bar.style.width = pct + '%';
   });
 
-  // On load: small animation
-  window.addEventListener('load', ()=>{ document.querySelectorAll('.card').forEach((c,i)=>{ c.style.transform='translateY(6px)'; c.style.opacity=0; setTimeout(()=>{ c.style.transition='all 420ms cubic-bezier(.2,.9,.2,1)'; c.style.transform='none'; c.style.opacity=1 }, 80*i) }) })
+  function grade(){
+    startTimer();
+    let score=0;
+    qs.forEach((q,i)=>{
+      const ans = q.dataset.ans;
+      const choice = q.querySelector('input:checked');
+      q.querySelectorAll('.opt').forEach(l=>l.style.background='transparent');
+      if(choice){
+        const label = choice.closest('.opt');
+        if(choice.value===ans){ score++; label.style.background = 'linear-gradient(90deg, rgba(19,136,8,.18), transparent)'; }
+        else{ label.style.background = 'linear-gradient(90deg, rgba(255,153,51,.18), transparent)'; }
+      }
+    });
+    document.getElementById('score').textContent = `आपके अंक: ${score}/${qs.length}`;
+  }
+  function resetQuiz(){
+    tick=0; clearInterval(timerId); timerId=null; timerEl.textContent = '00:00'; bar.style.width='0%';
+    qs.forEach(q=>{
+      q.querySelectorAll('input').forEach(i=>i.checked=false);
+      q.querySelectorAll('.opt').forEach(l=>l.style.background='transparent');
+    });
+    document.getElementById('score').textContent='';
+  }
+
+  // subtle entrance animation
+  window.addEventListener('load', ()=>{
+    document.querySelectorAll('section').forEach((s,i)=>{
+      s.style.opacity=0; s.style.transform='translateY(8px)';
+      setTimeout(()=>{ s.style.transition='all 480ms cubic-bezier(.2,.8,.2,1)'; s.style.opacity=1; s.style.transform='none'; }, 90*i);
+    });
+  });
 </script>
 </body>
-  </html>
+</html>
